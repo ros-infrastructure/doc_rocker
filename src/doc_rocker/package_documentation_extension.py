@@ -25,7 +25,7 @@ from rocker.extensions import RockerExtension
 
 class ROS2Doc(RockerExtension):
 
-    name = 'ros2doc'
+    name = 'doc_rocker'
 
     @classmethod
     def get_name(cls):
@@ -41,46 +41,44 @@ class ROS2Doc(RockerExtension):
         return ''
 
     def get_snippet(self, cliargs):
-        snippet = pkgutil.get_data('ros2doc', 'templates/%s_snippet.Dockerfile.em' % self.name).decode('utf-8')
+        snippet = pkgutil.get_data('doc_rocker', 'templates/%s_snippet.Dockerfile.em' % self.name).decode('utf-8')
         return em.expand(snippet, cliargs)
 
     def get_files(self, cliargs):
         all_files = {}
-        all_files['build_docs.py'] = pkgutil.get_data('ros2doc', 'files/build_docs.py').decode('utf-8')
-        all_files['conf.py'] = em.expand(pkgutil.get_data('ros2doc', 'templates/conf.py.em').decode('utf-8'), cliargs)
-        all_files['index.rst'] = em.expand(pkgutil.get_data('ros2doc', 'templates/index.rst.em').decode('utf-8'), cliargs)
-        # all_files['build_config.yaml'] = em.expand(pkgutil.get_data('ros2doc', 'templates/build_config.yaml.em').decode('utf-8'), cliargs)
+        all_files['build_docs.py'] = pkgutil.get_data('doc_rocker', 'files/build_docs.py').decode('utf-8')
+        all_files['conf.py.em'] = pkgutil.get_data('doc_rocker', 'templates/conf.py.em').decode('utf-8')
+        all_files['index.rst.em'] = pkgutil.get_data('doc_rocker', 'templates/index.rst.em').decode('utf-8')
         return all_files
 
     def get_docker_args(self, cliargs):
         args = ''
         #TODO(tfoote) a good exception here if the dir doesn't exist
-        package_dir = cliargs.get('documentation-package-dir', None)
+        package_dir = cliargs.get('documentation-package-dir')
+        output_dir = cliargs.get('output_dir')
+        crossref_dir = cliargs.get('crossref_dir')
         # doc_root = cliargs.get('doc-root', None)
         args += '  -v %s:/doc_root/package' % package_dir
-        #TODO(tfoote!!!!) hardcoded
-        args += '  -v /home/tfoote/output:/output'
-        # args += '  -v %s:/doc_root' % doc_root
+        if os.path.exists(output_dir) and not os.path.isdir(output_dir):
+            print("ERROR output is not a directory")
+        os.makedirs(output_dir, exist_ok=True)
+        args += '  -v %s:/output' % output_dir
+        args += '  -v %s:/crossref' % crossref_dir
 
         return args
 
     @staticmethod
     def register_arguments(parser, defaults={}):
-        parser.add_argument('--ros2doc',
+        parser.add_argument('--doc_rocker',
             action='store_true',
-            default=defaults.get('ros2doc', False),
-            help="Setup environment for ros2doc")
-        parser.add_argument('--documentation-package-dir',
-            help="The directory in which the package is to document.")
-        parser.add_argument('--crossref-dirs',
-            nargs='+',
+            default=defaults.get('doc_rocker', False),
+            help="Setup environment for doc_rocker")
+        parser.add_argument('--output-dir',
+            default='/tmp/package_docs',
+            help="The directory into which to put the documentation.")
+            # TODO(tfoote) add support for multiple crossref dirs
+        parser.add_argument('--crossref-dir',
             help="The directories in which to find cross references.")
-        parser.add_argument('--sphinx-subprojects',
-            nargs='+',
-            default = [],
-            help="The directories in which to find sphinx subprojects. TODO(tfoote) Do not use breaks exhale output of doxygen content")
-        parser.add_argument('--sphinx-output-dir',
-            help="The directory in which to put the sphinx output.")
         parser.add_argument('--doxygen-inputs',
             nargs='+',
             help="The inputs for doxygen, relative to the package")

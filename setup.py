@@ -9,17 +9,17 @@ install_requires = [
 
 
 kwargs = {
-    'name': 'ros2doc',
+    'name': 'doc_rocker',
     'version': '0.0.1',
-    'packages': ['ros2doc'],
+    'packages': ['doc_rocker'],
     'package_dir': {'': 'src'},
-    'package_data': {'ros2doc': ['templates/*.em', 'files/*']},
+    'package_data': {'doc_rocker': ['templates/*.em', 'files/*']},
     'entry_points': {
         'console_scripts': [
-            'ros2doc_package = ros2doc.main:main',
+            'doc_rocker_package = doc_rocker.main:main',
 	    ],
         'rocker.extensions': [
-            'ros2doc = ros2doc.package_documentation_extension:ROS2Doc',
+            'doc_rocker = doc_rocker.package_documentation_extension:ROS2Doc',
         ]
 	},
     'author': 'Tully Foote',
@@ -36,7 +36,7 @@ kwargs = {
     'python_requires': '>=3.0',
 
     'install_requires': install_requires,
-    'url': 'https://github.com/osrf/ros2doc'
+    'url': 'https://github.com/ros-infrastructure/doc_rocker'
 }
 
 setup(**kwargs)

@@ -9,7 +9,7 @@ Doxygen Content
 
 :doc:`api/library_root`
 
-:doc:`source/tf2_ros`
+:doc:`source/@(package_name)`
 
 
 Sphinx Subprojects
