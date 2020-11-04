@@ -30,7 +30,7 @@ It will generate the `conf.py` and `index.rst` and then invoke sphinx. As well a
 
 ## Known issues
 
-* Breathe and Exhale have problems with tagfiles. See: https://github.com/michaeljones/breathe/issues/32 and https://github.com/svenevs/exhale/issues/63
+* Breathe and Exhale have problems with tagfiles. See: https://github.com/michaeljones/breathe/issues/328 and https://github.com/svenevs/exhale/issues/63
 * Moving the exhale generation to anything but a single layer directory doesn't seem to work.
 * You are supposed to be able to invoke sphinx with additional subprojets with subsequent arguments to sphinx-build but that seems to break the exhale generation.
 
