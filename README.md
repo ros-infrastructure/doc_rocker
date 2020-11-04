@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-This package needs a rocker with https://github.com/osrf/rocker/tree/support_file_injection patch.
+This package needs a rocker with https://github.com/osrf/rocker/tree/support_file_injection patch which is now on master.
 
 It's recommended to create a venv and pip install the above and then use this repo in develop mode. 
 
@@ -39,3 +39,6 @@ It will generate the `conf.py` and `index.rst` and then invoke sphinx. As well a
 * Support finding and iterating over packages in a workspace and interacting with the build system to generate content prior to documentation.
 * Add an easy way to pull tagfiles and other resources locally for use in generation.
 
+## High Level Vision
+
+This is a tool designed to support per package documentation 
