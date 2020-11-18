@@ -1,6 +1,7 @@
 import em
 import os
 import subprocess
+import sys
 
 
 from catkin_pkg.package import package_exists_at
@@ -49,7 +50,7 @@ def aggregate_sphinx_inventories(dependencies):
 def document_package(pkg_dir):
     args_dict = {}
     if not package_exists_at(pkg_dir):
-        parser.error("No ROS package found at %s" % pkg_dir)
+        print("No ROS package found at %s" % pkg_dir, file=sys.stderr)
     package = parse_package(pkg_dir)
     args_dict['package_name'] = package.name
     args_dict['package_version'] = package.version
