@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import os
 from setuptools import setup
 
 install_requires = [
@@ -17,11 +16,11 @@ kwargs = {
     'entry_points': {
         'console_scripts': [
             'doc_rocker_package = doc_rocker.main:main',
-	    ],
+        ],
         'rocker.extensions': [
             'doc_rocker = doc_rocker.package_documentation_extension:ROS2Doc',
         ]
-	},
+    },
     'author': 'Tully Foote',
     'author_email': 'tfoote@osrfoundation.org',
     'keywords': ['Docker'],

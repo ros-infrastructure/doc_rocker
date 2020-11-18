@@ -1,19 +1,19 @@
-# Prototype for ROS 2 documentatoin
+# Prototype for ROS 2 documentation
 
 ## Prerequisites
 
 This package needs a rocker with https://github.com/osrf/rocker/tree/support_file_injection patch which is now on master.
 
-It's recommended to create a venv and pip install the above and then use this repo in develop mode. 
+It's recommended to create a venv and pip install the above and then use this repo in develop mode.
 
-The package.xml needs a little bit of metadata: 
+The package.xml needs a little bit of metadata:
 https://github.com/ros2/geometry2/pull/339
 
 Some extra smarts to guess paths w/o the explicit metadata could be done.
 
 ## Examples of running
 
-To 
+To
 
     doc_rocker_package ../geometry2_clean/tf2 --output /tmp/docs/tf2 --cross /tmp/docs
 
@@ -21,12 +21,10 @@ To
 
 ### Debugging
 
-If you add `--debug` to the command line above it will create the environment and drop you into a bash shell. 
+If you add `--debug` to the command line above it will create the environment and drop you into a bash shell.
 To invoke the standard entrypoint at that point just run `python3 build_docs.py`
 
 It will generate the `conf.py` and `index.rst` and then invoke sphinx. As well as create a few directories that sphinx will crash if they aren't there.
-
-
 
 ## Known issues
 
@@ -41,4 +39,4 @@ It will generate the `conf.py` and `index.rst` and then invoke sphinx. As well a
 
 ## High Level Vision
 
-This is a tool designed to support per package documentation 
+This is a tool designed to support per package documentation.
